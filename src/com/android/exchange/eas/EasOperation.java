@@ -577,12 +577,12 @@ public abstract class EasOperation {
             LogUtils.d(LOG_TAG, "No outbox for account %d, creating it", account.mId);
             final Mailbox outbox =
                     Mailbox.newSystemMailbox(mContext, account.mId, Mailbox.TYPE_OUTBOX);
-            outbox.save(mContext);
+            outbox.save(mContext, Eas.ENABLE_BYPASS_POLICY_REQUIREMENTS);
             mailboxId = outbox.mId;
         }
         msg.mMailboxKey = mailboxId;
         msg.mAccountKey = account.mId;
-        msg.save(mContext);
+        msg.save(mContext, Eas.ENABLE_BYPASS_POLICY_REQUIREMENTS);
         requestSyncForMailbox(new android.accounts.Account(account.mEmailAddress,
                 Eas.EXCHANGE_ACCOUNT_MANAGER_TYPE), mailboxId);
     }

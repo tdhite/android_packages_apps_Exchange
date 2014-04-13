@@ -566,7 +566,7 @@ public class EasOutboxService extends EasSyncService {
         if (mailbox != null) {
             msg.mMailboxKey = mailbox.mId;
             msg.mAccountKey = accountId;
-            msg.save(context);
+            msg.save(context, Eas.ENABLE_BYPASS_POLICY_REQUIREMENTS);
         }
     }
 }

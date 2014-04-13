@@ -393,12 +393,15 @@ public class EmailSyncAdapterService extends AbstractSyncAdapterService {
         }
 
         @Override
-        public void setLogging(final int flags) {
+        public void setServiceBitfields(final int bitfield) {
             // TODO: fix this?
             // Protocol logging
-            Eas.setUserDebug(flags);
+            Eas.setUserDebug(bitfield);
             // Sync logging
             //setUserDebug(flags);
+
+            // Must do this as well since the Logging flags share the bitfield variable.
+            Eas.setExchangeBypassPolicyRequirements(bitfield);
         }
 
         @Override

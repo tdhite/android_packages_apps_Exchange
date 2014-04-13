@@ -232,11 +232,12 @@ public class ExchangeService extends SyncManager {
         }
 
         @Override
-        public void setLogging(int flags) throws RemoteException {
+        public void setServiceBitfields(int bitfield) throws RemoteException {
             // Protocol logging
-            Eas.setUserDebug(flags);
+            Eas.setUserDebug(bitfield);
+            Eas.setExchangeBypassPolicyRequirements(bitfield);
             // Sync logging
-            setUserDebug(flags);
+            setUserDebug(bitfield);
         }
 
         @Override
@@ -670,7 +671,7 @@ public class ExchangeService extends SyncManager {
                 main.mType = Mailbox.TYPE_EAS_ACCOUNT_MAILBOX;
                 main.mSyncInterval = Mailbox.CHECK_INTERVAL_PUSH;
                 main.mFlagVisible = false;
-                main.save(getContext());
+                main.save(getContext(), Eas.ENABLE_BYPASS_POLICY_REQUIREMENTS);
                 log("Initializing account: " + acct.mDisplayName);
             }
         };
